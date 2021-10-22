@@ -1,0 +1,168 @@
+$deathKid: #f19184;
+$stein: #c8d58f;
+$blackStar: #7cd7f5;
+$maka: #902b3d;
+$sisters: #fac5de;
+$soul: #e3b475;
+
+:root {
+  font-size: 62.5%;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap");
+
+@mixin FlexIt($direction: row, $align: null, $justify: null, $wrap: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  flex-wrap: $wrap;
+}
+
+body {
+  background-color: #4158d0;
+  background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%)
+    no-repeat fixed center;
+  height: 100vh;
+  font-family: "Karla", sans-serif;
+}
+
+#root {
+  @include FlexIt(column, center);
+  .content-div {
+    width: 100%;
+    @include FlexIt(column, center);
+  }
+}
+
+nav {
+  width: 98%;
+  max-width: 550px;
+  background-color: #111;
+  margin: 30px 10px;
+  border-radius: 5px;
+  transition: all 5s ease-in-out;
+
+  @include FlexIt($justify: space-around);
+  .scores {
+    padding: 3px;
+    @include FlexIt($direction: column, $justify: center, $align: center);
+    p {
+      margin: 0;
+      padding: 3px;
+      color: white;
+      display: block;
+      font-size: 2.5rem;
+    }
+  }
+}
+.bigga {
+  transform: scale(2);
+}
+
+.main-div {
+  max-width: 800px;
+  @include FlexIt($wrap: wrap, $justify: center);
+  .cards-div {
+    overflow: hidden;
+    width: 190px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 5.2s ease-in-out;
+    @include FlexIt(column, $justify: space-between);
+    img {
+      transform: scale(1);
+      border-radius: 0px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+    .char-name-div {
+      margin-top: 5px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.7);
+      .char-name {
+        text-align: center;
+        font-size: 2rem;
+      }
+    }
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.modal-container {
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  @include FlexIt($direction: column, $align: center, $justify: center);
+  transition: all 0.3s ease-in-out;
+
+  .modal {
+    width: 400px;
+    height: 300px;
+    background-color: hsla(10, 100%, 100%, 0.9);
+    border-radius: 5px;
+    @include FlexIt($direction: column, $align: center, $justify: center);
+  }
+  .endgame-modal {
+    @include FlexIt($direction: column, $align: center, $justify: center);
+    h1 {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.tutorial-div {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .tutorial-div-buttons {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 5px 0px;
+    grid-template-areas: "previous finish next";
+
+    .previous-button {
+      grid-area: previous;
+    }
+    .finish-button {
+      grid-area: finish;
+    }
+    .next-button {
+      grid-area: next;
+    }
+  }
+}
+
+button {
+  background-color: black;
+  display: inline-block;
+  padding: 1.1rem 1.2rem;
+  border: none;
+  margin: 0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 15px;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #000;
+  }
+}
