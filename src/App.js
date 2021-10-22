@@ -10,6 +10,7 @@ import {
   shuffler,
   shuffledCardsSetter,
   getFromLocalStorage,
+  startGame,
 } from "./helperFunctions";
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     getFromLocalStorage("firstGame", true)
   );
   const [step, setStep] = useState(0);
-  const [winGame, setWinGame] = useState(false)
+  const [winGame, setWinGame] = useState(false);
   const [endGame, setEndGame] = useState(false);
   useEffect(() => {
     shuffledCardsSetter(setInitialCards, setCards);
@@ -49,13 +50,12 @@ function App() {
   const handleClick = (name, index) => {
     const isFinalRound = round <= CardsList.length - 1;
     if (!isFinalRound) {
-      return setWinGame(true)
+      return setWinGame(true);
     }
+    if (firstRound) return;
     const doesNameMatch = name === initialCards[round]["name"];
 
-    if (firstRound) {
-      setFirstRound((prevState) => false);
-    } else if (isFinalRound && doesNameMatch) {
+    if (isFinalRound && doesNameMatch) {
       setRound((prevState) => prevState + 1);
     } else {
       if (currentScore > bestScore) {
@@ -81,14 +81,13 @@ function App() {
     shuffledCardsSetter(setInitialCards, setCards);
     setCurrentScore(0);
     setEndGame(false);
-    setRound(0)
+    setRound(0);
     setFirstRound(true);
-    setWinGame(false)
+    setWinGame(false);
   }
 
   return (
     <div className="content-div">
-      {console.log()}
       {firstGame && (
         <Modals
           data={FirstGameContent}
@@ -105,6 +104,11 @@ function App() {
         scores={{ currentScore, bestScore }}
         setFirstGame={setFirstGame}
       />
+      {firstRound && (
+        <button onClick={() => startGame(setFirstRound, setCards)}>
+          Start Game
+        </button>
+      )}
       <main className="main-div">
         <Images cards={cards} handleClick={handleClick} />
       </main>

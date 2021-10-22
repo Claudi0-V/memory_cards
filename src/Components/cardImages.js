@@ -13,13 +13,11 @@ import card12 from "../cards/12.png";
 import card13 from "../cards/13.png";
 import card14 from "../cards/14.jpg";
 import card15 from "../cards/15.png";
-import card16 from "../cards/16.jpg";
 
 const cardList = [
   { name: "Maka Albarn", src: card01 },
   { name: "Mifune", src: card02 },
   { name: "Tsubaki", src: card03 },
-  { name: "Black-Star", src: card16 },
   { name: "Arachne", src: card04 },
   { name: "Stein", src: card05 },
   { name: "Chrona", src: card06 },
@@ -30,8 +28,8 @@ const cardList = [
   { name: "Medusa", src: card11 },
   { name: "Patty", src: card12 },
   { name: "Death-Kid", src: card13 },
-  { name: "Sid", src: card14 },
-  { name: "Spirit", src: card15 },
+  { name: "Spirit", src: card14 },
+  { name: "Black-Star", src: card15 },
 ];
 
 export default cardList;

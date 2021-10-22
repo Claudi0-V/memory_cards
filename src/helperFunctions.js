@@ -23,5 +23,9 @@ function getFromLocalStorage(item, altValue) {
   return saved || altValue;
 }
 
+function startGame(setFirstRound, setCards) {
+  setFirstRound((prevState) => false);
+  setCards(shuffler(CardsList));
+}
 
-export { shuffler, shuffledCardsSetter, getFromLocalStorage }
+export { shuffler, shuffledCardsSetter, getFromLocalStorage, startGame };

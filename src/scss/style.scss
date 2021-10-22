@@ -61,11 +61,12 @@ nav {
 }
 
 .main-div {
-  max-width: 800px;
+  max-width: 900px;
   @include FlexIt($wrap: wrap, $justify: center);
+  margin-bottom: 5px;
   .cards-div {
     overflow: hidden;
-    width: 190px;
+    width: 150px;
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
