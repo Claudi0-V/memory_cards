@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Images(props) {
   const { cards, handleClick } = props;

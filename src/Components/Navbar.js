@@ -1,5 +1,6 @@
 function Navbar(props) {
-  const { currentScore, bestScore } = props.scores;
+  const {currentScore, bestScore} = props.scores;
+  const {setFirstGame} = props
   return (
     <nav>
       <div className="scores">
@@ -10,6 +11,7 @@ function Navbar(props) {
         <p>Best Score</p>
         <p>{bestScore}</p>
       </div>
+      <div className="scores"><p class="redo-tutorial" onClick={() => setFirstGame(true)}>?</p></div>
     </nav>
   );
 }

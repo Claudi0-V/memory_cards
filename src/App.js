@@ -6,8 +6,11 @@ import CardsList from "./Components/cardImages.js";
 import Navbar from "./Components/Navbar.js";
 import Modals from "./Components/Modals.js";
 import FirstGameContent from "./Components/FirstGameContent.js";
-import {shuffler, shuffledCardsSetter, getFromLocalStorage} from "./helperFunctions"
-
+import {
+  shuffler,
+  shuffledCardsSetter,
+  getFromLocalStorage,
+} from "./helperFunctions";
 
 function App() {
   const [initialCards, setInitialCards] = useState([]);
@@ -22,6 +25,7 @@ function App() {
     getFromLocalStorage("firstGame", true)
   );
   const [step, setStep] = useState(0);
+  const [winGame, setWinGame] = useState(false)
   const [endGame, setEndGame] = useState(false);
   useEffect(() => {
     shuffledCardsSetter(setInitialCards, setCards);
@@ -38,8 +42,15 @@ function App() {
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
   }, [bestScore]);
 
+  useEffect(() => {
+    localStorage.setItem("firstGame", JSON.stringify(false));
+  }, [firstGame]);
+
   const handleClick = (name, index) => {
     const isFinalRound = round <= CardsList.length - 1;
+    if (!isFinalRound) {
+      return setWinGame(true)
+    }
     const doesNameMatch = name === initialCards[round]["name"];
 
     if (firstRound) {
@@ -50,6 +61,7 @@ function App() {
       if (currentScore > bestScore) {
         setBestScore(currentScore);
       }
+      setEndGame(true);
     }
     setCards(shuffler(CardsList));
   };
@@ -62,7 +74,6 @@ function App() {
       setStep((prevState) => prevState + 1);
     } else {
       setFirstGame(false);
-      localStorage.setItem("firstGame", JSON.stringify(false));
     }
   };
 
@@ -70,11 +81,14 @@ function App() {
     shuffledCardsSetter(setInitialCards, setCards);
     setCurrentScore(0);
     setEndGame(false);
+    setRound(0)
     setFirstRound(true);
+    setWinGame(false)
   }
 
   return (
     <div className="content-div">
+      {console.log()}
       {firstGame && (
         <Modals
           data={FirstGameContent}
@@ -84,8 +98,13 @@ function App() {
           handleModal={handleModal}
         />
       )}
-      {endGame && <Modals resetGame={resetGame} />}
-      <Navbar scores={{ currentScore, bestScore }} />
+      {endGame && <Modals type="gameLost" resetGame={resetGame} />}
+      {winGame && <Modals type="gameWin" resetGame={resetGame} />}
+
+      <Navbar
+        scores={{ currentScore, bestScore }}
+        setFirstGame={setFirstGame}
+      />
       <main className="main-div">
         <Images cards={cards} handleClick={handleClick} />
       </main>

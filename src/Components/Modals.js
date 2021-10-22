@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Tutorial from "./Modals/Tutorial.js";
 import Game from "./Modals/Game.js";
+import WinGame from "./Modals/WinGame.js"
 
 function Modals(props) {
-  const {data, step, handleModal, type, resetGame} = props;
-  const typeTest = type === "tutorial";
+  const { data, step, handleModal, type, resetGame } = props;
   return (
     <div className="modal-container">
       <div className="modal">
-        {typeTest ? (
-          <Tutorial data={data} step={step}  handleModal={handleModal} />
-        ) : 
-          <Game resetGame={resetGame} />
-        }
+        {type === "tutorial" && (
+          <Tutorial data={data} step={step} handleModal={handleModal} />
+        )}
+        {type === "gameLost" && <Game resetGame={resetGame} />}
+{type === "gameWin" && <WinGame resetGame={resetGame}  />}
       </div>
     </div>
   );
